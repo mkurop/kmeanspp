@@ -15,11 +15,11 @@ import cupy as cp
 
 def distances_squared(points_not_choosed_thus_far: cp.ndarray,
                       center: cp.ndarray):
-    """distances_squared.
+    """
     Computes the squared norm of differences between all points
     in points_not_choosed_thus_far and the center point.
 
-    :param points_not_choosed_thus_far: points not choosen thus far by the selection process
+    :param points_not_choosed_thus_far: points not choosen thus far by the selection process \
     points are stored as columns
     :type points_not_choosed_thus_far: cp.ndarray
     :param center: newly choosen center point
@@ -34,12 +34,12 @@ def distances_squared(points_not_choosed_thus_far: cp.ndarray,
 
 
 def kmeanspp(train_set: cp.ndarray, num_codevectors: int, verbose: bool = True):
-    """kmeanspp.
+    """
     Runs the kmeans++ algorithm. The computations precision is inherited from the train_set.
 
     :param train_set: training set, points as columns
     :type train_set: cp.ndarray
-    :param num_codevectors: number of codevectors in the in the initial codebook
+    :param num_codevectors: number of codevectors in the initial codebook
     :type num_codevectors: int
     :param verbose: print additional information while running
     :type verbose: bool
