@@ -13,4 +13,4 @@ The CuPy version runs, for 10 000 000 training vectors and codebook size of 1000
 The NumPy version runs, on a single thread, for the same problem size, in about 789 seconds.
 
 ## Documentation
-Full documentation of the functions provided in the module is available [here]: https://www.mkurop.github.io/kmeanspp
+Full documentation of the functions provided in the module is available https://mkurop.github.io/kmeanspp
