@@ -49,13 +49,13 @@ def kmeanspp(train_set: cp.ndarray, num_codevectors: int, verbose: bool = True):
     start_time = datetime.datetime.now()
 
     # choose first codevector
-    remaining_points = train_set  # points to choose among
+    remaining_points = cp.arange(train_set.shape[1]) # points to choose among
 
-    i = cp.random.choice(remaining_points.shape[1], size=1)
+    i = cp.random.choice(remaining_points.shape[0], size=1)
 
     initial_codebook = cp.zeros((train_set.shape[0], num_codevectors), dtype = train_set.dtype)
 
-    initial_codebook[:, 0] = remaining_points[:, i].ravel()
+    initial_codebook[:, 0] = train_set[:,remaining_points[i]].ravel()
 
     # choose remaining codevectors
     start_chunk = time.time()
@@ -73,15 +73,15 @@ def kmeanspp(train_set: cp.ndarray, num_codevectors: int, verbose: bool = True):
             start_chunk = time.time()
 
         remaining_points = \
-            cp.concatenate((remaining_points[:,0:i],remaining_points[:,i+1:]), axis = 1)
+            cp.concatenate((remaining_points[:i],remaining_points[i+1:]), axis = 0)
 
-        dist2 = distances_squared(remaining_points, initial_codebook[:, n - 1])
+        dist2 = distances_squared(train_set[:,remaining_points], initial_codebook[:, n - 1])
 
         p = dist2 / cp.sum(dist2)
 
-        i = cp.random.choice(remaining_points.shape[1], size=1, p=p)
+        i = cp.random.choice(remaining_points.shape[0], size=1, p=p)
 
-        initial_codebook[:, n] = remaining_points[:, i].ravel()
+        initial_codebook[:, n] = train_set[:,remaining_points[i]].ravel()
 
     end = time.time()
 

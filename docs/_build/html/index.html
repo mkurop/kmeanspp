@@ -41,14 +41,14 @@
 for the subsequent kmeans iterations. Uses the NumPy library.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="src.kmeanspp_numpy.distances_squared">
-<span class="sig-prename descclassname"><span class="pre">src.kmeanspp_numpy.</span></span><span class="sig-name descname"><span class="pre">distances_squared</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">points_not_choosed_thus_far</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">numpy.ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">center</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">numpy.ndarray</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/kmeanspp_numpy.html#distances_squared"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.kmeanspp_numpy.distances_squared" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">src.kmeanspp_numpy.</span></span><span class="sig-name descname"><span class="pre">distances_squared</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">points_not_chosen_thus_far</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">numpy.ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">center</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">numpy.ndarray</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/kmeanspp_numpy.html#distances_squared"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.kmeanspp_numpy.distances_squared" title="Permalink to this definition">¶</a></dt>
 <dd><p>Computes the squared norm of differences between all points
-in points_not_choosed_thus_far and the center point.</p>
+in points_not_chosen_thus_far and the center point.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>points_not_choosed_thus_far</strong> (<em>numpy.ndarray</em>) – points not choosen thus far by the selection process     points are stored as columns</p></li>
-<li><p><strong>center</strong> (<em>numpy.ndarray</em>) – newly choosen center point</p></li>
+<li><p><strong>points_not_chosen_thus_far</strong> (<em>numpy.ndarray</em>) – points not chosen thus far by the selection process     points are stored as columns</p></li>
+<li><p><strong>center</strong> (<em>numpy.ndarray</em>) – newly chosen center point</p></li>
 </ul>
 </dd>
 </dl>
@@ -62,7 +62,7 @@ in points_not_choosed_thus_far and the center point.</p>
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>train_set</strong> (<em>numpy.ndarray</em>) – training set, points as columns</p></li>
-<li><p><strong>num_codevectors</strong> (<em>int</em>) – number of codevectors in the in the initial codebook</p></li>
+<li><p><strong>num_codevectors</strong> (<em>int</em>) – number of codevectors in the initial codebook</p></li>
 <li><p><strong>verbose</strong> (<em>bool</em>) – print additional information while running</p></li>
 </ul>
 </dd>
@@ -76,14 +76,14 @@ in points_not_choosed_thus_far and the center point.</p>
 for the subsequent kmeans iterations. Uses the CuPy library.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="src.kmeanspp_cupy.distances_squared">
-<span class="sig-prename descclassname"><span class="pre">src.kmeanspp_cupy.</span></span><span class="sig-name descname"><span class="pre">distances_squared</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">points_not_choosed_thus_far</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">cupy.core.core.ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">center</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">cupy.core.core.ndarray</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/kmeanspp_cupy.html#distances_squared"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.kmeanspp_cupy.distances_squared" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">src.kmeanspp_cupy.</span></span><span class="sig-name descname"><span class="pre">distances_squared</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">points_not_chosen_thus_far</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">cupy.core.core.ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">center</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">cupy.core.core.ndarray</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/kmeanspp_cupy.html#distances_squared"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.kmeanspp_cupy.distances_squared" title="Permalink to this definition">¶</a></dt>
 <dd><p>Computes the squared norm of differences between all points
-in points_not_choosed_thus_far and the center point.</p>
+in points_not_chosen_thus_far and the center point.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>points_not_choosed_thus_far</strong> (<em>cp.ndarray</em>) – points not choosen thus far by the selection process     points are stored as columns</p></li>
-<li><p><strong>center</strong> (<em>cp.ndarray</em>) – newly choosen center point</p></li>
+<li><p><strong>points_not_chosen_thus_far</strong> (<em>cp.ndarray</em>) – points not chosen thus far by the selection process     points are stored as columns</p></li>
+<li><p><strong>center</strong> (<em>cp.ndarray</em>) – newly chosen center point</p></li>
 </ul>
 </dd>
 </dl>
@@ -97,7 +97,7 @@ in points_not_choosed_thus_far and the center point.</p>
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>train_set</strong> (<em>cp.ndarray</em>) – training set, points as columns</p></li>
-<li><p><strong>num_codevectors</strong> (<em>int</em>) – number of codevectors in the in the initial codebook</p></li>
+<li><p><strong>num_codevectors</strong> (<em>int</em>) – number of codevectors in the initial codebook</p></li>
 <li><p><strong>verbose</strong> (<em>bool</em>) – print additional information while running</p></li>
 </ul>
 </dd>

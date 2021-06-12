@@ -46,20 +46,20 @@
 <span class="kn">import</span> <span class="nn">cupy</span> <span class="k">as</span> <span class="nn">cp</span>
 
 
-<div class="viewcode-block" id="distances_squared"><a class="viewcode-back" href="../../index.html#src.kmeanspp_cupy.distances_squared">[docs]</a><span class="k">def</span> <span class="nf">distances_squared</span><span class="p">(</span><span class="n">points_not_choosed_thus_far</span><span class="p">:</span> <span class="n">cp</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+<div class="viewcode-block" id="distances_squared"><a class="viewcode-back" href="../../index.html#src.kmeanspp_cupy.distances_squared">[docs]</a><span class="k">def</span> <span class="nf">distances_squared</span><span class="p">(</span><span class="n">points_not_chosen_thus_far</span><span class="p">:</span> <span class="n">cp</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
                       <span class="n">center</span><span class="p">:</span> <span class="n">cp</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Computes the squared norm of differences between all points</span>
-<span class="sd">    in points_not_choosed_thus_far and the center point.</span>
+<span class="sd">    in points_not_chosen_thus_far and the center point.</span>
 
-<span class="sd">    :param points_not_choosed_thus_far: points not choosen thus far by the selection process \</span>
+<span class="sd">    :param points_not_chosen_thus_far: points not chosen thus far by the selection process \</span>
 <span class="sd">    points are stored as columns</span>
-<span class="sd">    :type points_not_choosed_thus_far: cp.ndarray</span>
-<span class="sd">    :param center: newly choosen center point</span>
+<span class="sd">    :type points_not_chosen_thus_far: cp.ndarray</span>
+<span class="sd">    :param center: newly chosen center point</span>
 <span class="sd">    :type center: cp.ndarray</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="n">diffs</span> <span class="o">=</span> <span class="n">cp</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">points_not_choosed_thus_far</span><span class="p">)</span> <span class="o">-</span> <span class="n">center</span>
+    <span class="n">diffs</span> <span class="o">=</span> <span class="n">cp</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">points_not_chosen_thus_far</span><span class="p">)</span> <span class="o">-</span> <span class="n">center</span>
 
     <span class="n">distances_squared</span> <span class="o">=</span> <span class="n">cp</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">diffs</span> <span class="o">*</span> <span class="n">diffs</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 
@@ -72,7 +72,7 @@
 
 <span class="sd">    :param train_set: training set, points as columns</span>
 <span class="sd">    :type train_set: cp.ndarray</span>
-<span class="sd">    :param num_codevectors: number of codevectors in the in the initial codebook</span>
+<span class="sd">    :param num_codevectors: number of codevectors in the initial codebook</span>
 <span class="sd">    :type num_codevectors: int</span>
 <span class="sd">    :param verbose: print additional information while running</span>
 <span class="sd">    :type verbose: bool</span>
@@ -82,13 +82,13 @@
     <span class="n">start_time</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
 
     <span class="c1"># choose first codevector</span>
-    <span class="n">remaining_points</span> <span class="o">=</span> <span class="n">train_set</span>  <span class="c1"># points to choose among</span>
+    <span class="n">remaining_points</span> <span class="o">=</span> <span class="n">cp</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">train_set</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="c1"># points to choose among</span>
 
-    <span class="n">i</span> <span class="o">=</span> <span class="n">cp</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">remaining_points</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">size</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">i</span> <span class="o">=</span> <span class="n">cp</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">remaining_points</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">size</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 
     <span class="n">initial_codebook</span> <span class="o">=</span> <span class="n">cp</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">train_set</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">num_codevectors</span><span class="p">),</span> <span class="n">dtype</span> <span class="o">=</span> <span class="n">train_set</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
 
-    <span class="n">initial_codebook</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">remaining_points</span><span class="p">[:,</span> <span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span>
+    <span class="n">initial_codebook</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">train_set</span><span class="p">[:,</span><span class="n">remaining_points</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span>
 
     <span class="c1"># choose remaining codevectors</span>
     <span class="n">start_chunk</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
@@ -106,15 +106,15 @@
             <span class="n">start_chunk</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
 
         <span class="n">remaining_points</span> <span class="o">=</span> \
-            <span class="n">cp</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">remaining_points</span><span class="p">[:,</span><span class="mi">0</span><span class="p">:</span><span class="n">i</span><span class="p">],</span><span class="n">remaining_points</span><span class="p">[:,</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">:]),</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+            <span class="n">cp</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">remaining_points</span><span class="p">[:</span><span class="n">i</span><span class="p">],</span><span class="n">remaining_points</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">:]),</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span>
 
-        <span class="n">dist2</span> <span class="o">=</span> <span class="n">distances_squared</span><span class="p">(</span><span class="n">remaining_points</span><span class="p">,</span> <span class="n">initial_codebook</span><span class="p">[:,</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">])</span>
+        <span class="n">dist2</span> <span class="o">=</span> <span class="n">distances_squared</span><span class="p">(</span><span class="n">train_set</span><span class="p">[:,</span><span class="n">remaining_points</span><span class="p">],</span> <span class="n">initial_codebook</span><span class="p">[:,</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">])</span>
 
         <span class="n">p</span> <span class="o">=</span> <span class="n">dist2</span> <span class="o">/</span> <span class="n">cp</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">dist2</span><span class="p">)</span>
 
-        <span class="n">i</span> <span class="o">=</span> <span class="n">cp</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">remaining_points</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">size</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="n">p</span><span class="p">)</span>
+        <span class="n">i</span> <span class="o">=</span> <span class="n">cp</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">remaining_points</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">size</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="n">p</span><span class="p">)</span>
 
-        <span class="n">initial_codebook</span><span class="p">[:,</span> <span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="n">remaining_points</span><span class="p">[:,</span> <span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span>
+        <span class="n">initial_codebook</span><span class="p">[:,</span> <span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="n">train_set</span><span class="p">[:,</span><span class="n">remaining_points</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span>
 
     <span class="n">end</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
 
