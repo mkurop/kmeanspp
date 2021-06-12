@@ -19,7 +19,7 @@ def distances_squared(points_not_chosen_thus_far: cp.ndarray,
     Computes the squared norm of differences between all points
     in points_not_chosen_thus_far and the center point.
 
-    :param points_not_chosen_thus_far: points not choosen thus far by the selection process \
+    :param points_not_chosen_thus_far: points not chosen thus far by the selection process \
     points are stored as columns
     :type points_not_chosen_thus_far: cp.ndarray
     :param center: newly chosen center point
